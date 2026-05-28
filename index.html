@@ -148,16 +148,18 @@ window.answer = async function (choice) {
   if (choice === "YES") {
     text.innerHTML = "i knew it 😄❤️";
   } 
-  else if (choice === "yes") {
+  
+else if (choice === "yes" || choice === "no") {
+
+  if (choice === "yes") {
     text.innerHTML = "ok so u hate me no enthusiasm 😐";
   } 
- 
-else if (choice === "no") {
-  text.innerHTML = "now why would you pick that... shame on you";
-
+  else {
+    text.innerHTML = "now why would you pick that... shame on you";
+  }
   count++;
 
-  const ref = doc(db, "shame", "counter");
+const ref = doc(db, "shame", "counter");
   await setDoc(ref, { value: count });
 
   document.getElementById("counterBox").style.display = "block";
@@ -165,6 +167,7 @@ else if (choice === "no") {
   document.getElementById("counter").innerHTML =
     '🚨 MICK HATED RUNA <span class="count-number">' + count + '</span> TIMES 🚨';
 }
+
 
 };
 
