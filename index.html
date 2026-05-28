@@ -58,7 +58,7 @@
   }
 </style>
 
-<!-- ✅ FIREBASE + LOGIC -->
+
 <script type="module">
   import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
   import { getFirestore, doc, getDoc, setDoc } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
@@ -96,7 +96,6 @@
 
   window.onload = loadCount;
 
-  // Make functions global so buttons work
   window.showPopup = function () {
     document.getElementById("popup").style.display = "block";
   };
@@ -135,10 +134,9 @@
 
 <div class="box">
   <h2>Human Verification needed</h2>
-  <button onclick="showPopup()">OK</button>
+  <button onclick="showPopup()">PROCEED</button>
 </div>
 
-<!-- ✅ GLOBAL SHAME COUNTER -->
 <div class="box">
   <h2 id="counter">Loading shame...</h2>
 </div>
