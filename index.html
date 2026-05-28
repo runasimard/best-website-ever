@@ -39,7 +39,6 @@
     background-color: #c63c5d;
   }
 
-  /* Popup background */
   .popup {
     display: none;
     position: fixed;
@@ -50,7 +49,6 @@
     background: rgba(0,0,0,0.6);
   }
 
-  /* Popup box */
   .popup-content {
     background: white;
     padding: 20px;
@@ -67,15 +65,16 @@
   }
 
   function answer(choice) {
+    const text = document.getElementById("question");
+
     if (choice === "YES") {
-      alert("I knew it 😄❤️");
+      text.innerHTML = "I knew it 😄❤️";
     } 
     else if (choice === "yes") {
-      alert("ok so no enthusiasm 😐");
+      text.innerHTML = "ok so u hate me no enthusiasm 😐";
     } 
     else if (choice === "no") {
-      alert("Wow okay 😭");
-      window.close(); // might not work unless tab was opened by script
+      text.innerHTML = "Wow okay 😭";
     }
   }
 </script>
@@ -86,7 +85,7 @@
 
 <header>
   <h1>Runa's Legendary Site</h1>
-  <p>Welcome to my awesome website!</p>
+  <p>Welcome to my VERY wholesome website!</p>
 </header>
 
 <div class="box">
@@ -94,13 +93,13 @@
   <button onclick="showPopup()">OK</button>
 </div>
 
-<!-- POPUP -->
+<!-- CUSTOM POPUP -->
 <div id="popup" class="popup">
   <div class="popup-content">
-    <h3>Do you love me?</h3>
-    <button onclick="answer('YES')">YES</button>
+    <h3 id="question">Do you love me?</h3>
+    <button onclick="answer('YES')">YEEEEES</button>
     <button onclick="answer('yes')">yes</button>
-    <button onclick="answer('no')">no</button>
+    <button onclick="answer('no')">no.</button>
   </div>
 </div>
 
