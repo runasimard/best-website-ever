@@ -73,12 +73,14 @@ header {
     border-radius: 10px;
   }
 
-.count-number {
-  color: #000000
+
+count-number {
+  color: #000000;
   font-weight: 900;
   font-size: 22px;
   text-shadow: 0 0 5px rgba(255, 0, 80, 0.6);
 }
+
 
 
 </style>
@@ -128,9 +130,9 @@ async function loadCount() {
     document.getElementById("counterBox").style.display = "block";
   }
 
-  
-document.getElementById("counter").innerHTML =
-  'MICK HATED RUNA <span class="count-number">' + count + '</span> TIMES';
+document.getElementById("counter").innerText =
+  "MICK HATED RUNA " + count + " TIMES";
+
 
 }
 
@@ -161,8 +163,9 @@ window.answer = async function (choice) {
     // ✅ reveal counter
     document.getElementById("counterBox").style.display = "block";
 
-    document.getElementById("counter").innerText =
-      "MICK HATED RUNA " + count + " TIMES";
+    document.getElementById("counter").innerHTML =
+  'MICK HATED RUNA <span class="count-number">' + count + '</span> TIMES';
+`
   }
 };
 
