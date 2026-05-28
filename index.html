@@ -115,6 +115,7 @@ const db = getFirestore(app);
 
 let count = 0;
 
+
 async function loadCount() {
   const ref = doc(db, "shame", "counter");
   const snap = await getDoc(ref);
@@ -130,10 +131,8 @@ async function loadCount() {
     document.getElementById("counterBox").style.display = "block";
   }
 
-document.getElementById("counter").innerText =
-  "MICK HATED RUNA " + count + " TIMES";
-
-
+  document.getElementById("counter").innerHTML =
+    '🚨 MICK HATED RUNA <span class="count-number">' + count + '</span> TIMES 🚨';
 }
 
 window.onload = loadCount;
@@ -152,21 +151,21 @@ window.answer = async function (choice) {
   else if (choice === "yes") {
     text.innerHTML = "ok so u hate me no enthusiasm 😐";
   } 
-  else if (choice === "no") {
-    text.innerHTML = "now why would you pick that... shame on you";
+ 
+else if (choice === "no") {
+  text.innerHTML = "now why would you pick that... shame on you";
 
-    count++;
+  count++;
 
-    const ref = doc(db, "shame", "counter");
-    await setDoc(ref, { value: count });
+  const ref = doc(db, "shame", "counter");
+  await setDoc(ref, { value: count });
 
-    // ✅ reveal counter
-    document.getElementById("counterBox").style.display = "block";
+  document.getElementById("counterBox").style.display = "block";
 
-    document.getElementById("counter").innerHTML =
-  'MICK HATED RUNA <span class="count-number">' + count + '</span> TIMES';
-`
-  }
+  document.getElementById("counter").innerHTML =
+    '🚨 MICK HATED RUNA <span class="count-number">' + count + '</span> TIMES 🚨';
+}
+
 };
 
 </script>
