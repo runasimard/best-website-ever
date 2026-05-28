@@ -108,13 +108,15 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/fireba
 import { getFirestore, doc, getDoc, setDoc } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
 // Close popup when clicking outside
-window.addEventListener("click", function (event) {
-  const popup = document.getElementById("popup");
 
-  if (event.target === popup) {
-    popup.style.display = "none";
-  }
+window.addEventListener("click", function (event) {
+  const popup1 = document.getElementById("popup");
+  const popup2 = document.getElementById("popup2");
+
+  if (event.target === popup1) popup1.style.display = "none";
+  if (event.target === popup2) popup2.style.display = "none";
 });
+
 
 const firebaseConfig = {
   apiKey: "AIzaSyDQqYVloL2KEZBpYDS2AqIW35zuZqS4bBw",
