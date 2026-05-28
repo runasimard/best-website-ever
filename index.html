@@ -7,15 +7,54 @@
   body {
     margin: 0;
     font-family: Figtree, sans-serif;
+    text-align: center;
   }
 
   header {
     background-color: #E34A6F;
     color: white;
     padding: 30px;
-    text-align: center;
   }
+
+  .box {
+    margin: 50px auto;
+    padding: 20px;
+    width: 300px;
+    border: 2px solid #E34A6F;
+    border-radius: 10px;
+    background-color: #fff0f5;
+  }
+
+  button {
+    margin: 10px;
+    padding: 10px 15px;
+    border: none;
+    background-color: #E34A6F;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+  button:hover {
+    background-color: #c63c5d;
+  }
+
 </style>
+
+<script>
+  function showPopup() {
+    let answer = prompt("Do you love me? (YES / yes / no)");
+
+    if (answer === "YES" || answer === "yes") {
+      alert("Aww, I love you too! ❤️");
+    } else if (answer === "no") {
+      alert("That's okay... maybe someday 😢");
+    } else {
+      alert("Please answer YES, yes, or no!");
+    }
+  }
+</script>
+
 </head>
 
 <body>
@@ -24,6 +63,11 @@
   <h1>Runa's Legendary Site</h1>
   <p>Welcome to my awesome website!</p>
 </header>
+
+<div class="box">
+  <h2>Human Verification needed</h2>
+  <button onclick="showPopup()">OK</button>
+</div>
 
 </body>
 </html>
