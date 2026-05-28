@@ -55,7 +55,7 @@ header {
     background-color: #c63c5d;
   }
 
-  .popup {
+  pop.up {
     display: none;
     position: fixed;
     top: 0;
@@ -65,7 +65,7 @@ header {
     background: rgba(0,0,0,0.6);
   }
 
-  .popup-content {
+  pop.up-content {
     background: white;
     padding: 20px;
     margin: 15% auto;
@@ -135,6 +135,21 @@ async function loadCount() {
     '🚨 MICK HATED RUNA <span class="count-number">' + count + '</span> TIMES 🚨';
 }
 
+// When he confirms ultimate love
+window.trueLove = function () {
+  alert("as you should 😌❤️");
+};
+
+// EVIL BUTTON THAT RUNS AWAY
+window.moveButton = function () {
+  const btn = document.getElementById("escapeBtn");
+
+  const x = Math.random() * 200 - 100;
+  const y = Math.random() * 200 - 100;
+
+  btn.style.transform = `translate(${x}px, ${y}px)`;
+};
+
 window.onload = loadCount;
 
 window.showPopup = function () {
@@ -145,9 +160,12 @@ window.showPopup = function () {
 window.answer = async function (choice) {
   const text = document.getElementById("question");
 
-  if (choice === "YES") {
-    text.innerHTML = "i knew it 😄❤️";
-  } 
+  
+if (choice === "YES") {
+  document.getElementById("popup").style.display = "none";
+  document.getElementById("popup2").style.display = "block";
+}
+
   
 else if (choice === "yes" || choice === "no") {
 
@@ -204,6 +222,21 @@ const ref = doc(db, "shame", "counter");
     <button onclick="answer('YES')">YEEEEES</button>
     <button onclick="answer('yes')">yes</button>
     <button onclick="answer('no')">no.</button>
+  </div>
+</div>
+
+<div id="popup2" class="popup">
+  <div class="popup-content">
+    <h3>Do YOU tho?</h3>
+
+    <button onclick="trueLove()">YES YOURE THE LOVE OF MY LIFE</button>
+
+    <button id="escapeBtn" 
+      onmouseover="moveButton()" 
+      style="position: relative;">
+      no
+    </button>
+
   </div>
 </div>
 
