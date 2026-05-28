@@ -72,6 +72,15 @@ header {
     width: 300px;
     border-radius: 10px;
   }
+
+.count-number {
+  color: #ff1a4d;
+  font-weight: 900;
+  font-size: 22px;
+  text-shadow: 0 0 5px rgba(255, 0, 80, 0.6);
+}
+
+
 </style>
 
 
@@ -121,8 +130,10 @@ async function loadCount() {
     document.getElementById("counterBox").style.display = "block";
   }
 
-  document.getElementById("counter").innerText =
-    "Mick hated Runa " + count + " times";
+  
+document.getElementById("counter").innerHTML =
+  'Mick hated Runa <span class="count-number">' + count + '</span> times';
+
 }
 
 window.onload = loadCount;
