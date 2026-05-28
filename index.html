@@ -78,21 +78,25 @@
 
   let count = 0;
 
-  // Load counter from Firebase
-  async function loadCount() {
-    const ref = doc(db, "shame", "counter");
-    const snap = await getDoc(ref);
+  
+sync function loadCount() {
+  const ref = doc(db, "shame", "counter");
+  const snap = await getDoc(ref);
 
-    if (snap.exists()) {
-      count = snap.data().value;
-    } else {
-      count = 0;
-      await setDoc(ref, { value: 0 });
-    }
-
-    document.getElementById("counter").innerText =
-      "Mick hated Runa " + count + " times";
+  if (snap.exists()) {
+    count = snap.data().value;
+  } else {
+    count = 0;
+    await setDoc(ref, { value: 0 });
   }
+
+  if (count > 0) {
+    document.getElementById("counterBox").style.display = "block";
+  }
+
+  document.getElementById("counter").innerText =
+    "Mick hated Runa " + count + " times";
+}
 
   window.onload = loadCount;
 
@@ -137,9 +141,11 @@
   <button onclick="showPopup()">PROCEED</button>
 </div>
 
-<div class="box">
+
+<div id="counterBox" class="box" style="display:none;">
   <h2 id="counter">Loading shame...</h2>
 </div>
+
 
 <!-- POPUP -->
 <div id="popup" class="popup">
@@ -153,4 +159,4 @@
 
 </body>
 </html>
-``
+
