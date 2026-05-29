@@ -1,1 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>The Truth 💖</title>
 
+<style>
+body {
+  margin: 0;
+  font-family: Figtree, sans-serif;
+  text-align: center;
+  background: linear-gradient(135deg, #fff0f5, #ffe4ec);
+}
+
+header {
+  background-color: #E34A6F;
+  color: white;
+  padding: 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header-left {
+  text-align: left;
+}
+
+.header-counter {
+  background: #FCA311;
+  padding: 10px 15px;
+  border-radius: 10px;
+  font-size: 14px;
+}
+
+.count-number {
+  font-weight: 900;
+  font-size: 22px;
+}
+
+.main {
+  margin-top: 100px;
+}
+
+.big-text {
+  font-size: 30px;
+  color: #E34A6F;
+}
+</style>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyDQqYVloL2KEZBpYDS2AqIW35zuZqS4bBw",
+  authDomain: "best-website-f6384.firebaseapp.com",
+  projectId: "best-website-f6384",
+  storageBucket: "best-website-f6384.firebasestorage.app",
+  messagingSenderId: "219068026223",
+  appId: "1:219068026223:web:949b3a757982e24e486c9a"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+async function loadCount() {
+  const ref = doc(db, "shame", "counter");
+  const snap = await getDoc(ref);
+
+  let count = 0;
+  if (snap.exists()) {
+    count = snap.data().value;
+  }
+
+  if (count > 0) {
+    document.getElementById("counterBox").style.display = "block";
+  }
+
+  document.getElementById("counter").innerHTML =
+    '🚨 MICK HATED RUNA <span class="count-number">' + count + '</span> TIMES 🚨';
+}
+
+window.onload = loadCount;
+</script>
+
+</head>
+
+<body>
+
+<header>
+  <div class="header-left">
+    <h1>RUNA'S LEGENDARY SITE</h1>
+    <p>Final verdict 👀</p>
+  </div>
+
+  <div id="counterBox" class="header-counter" style="display:none;">
+    <h3 id="counter">Loading shame...</h3>
+  </div>
+</header>
+
+<div class="main">
+  <p class="big-text">HE CONFIRMED. IT'S OFFICIAL 💖</p>
+  <p>you may celebrate accordingly 🫡</p>
+</div>
+
+</body>
+</html>
