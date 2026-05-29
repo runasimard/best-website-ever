@@ -55,9 +55,27 @@ header {
   background: #fff0f5;
   border: 2px solid #E34A6F;
   border-radius: 10px;
-  width:400px;
+  width:500px;
+}
+.music-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
+.music-header button {
+  background: #E34A6F;
+  color: white;
+  border: none;
+  padding: 6px 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.music-header button:hover {
+  background: #c73c5e;
+}
 </style>
 
 <script type="module">
@@ -92,20 +110,26 @@ async function loadCount() {
   document.getElementById("counter").innerHTML =
     '🚨 MICK HATED RUNA <span class="count-number">' + count + '</span> TIMES 🚨';
 }
-  
-function loadSong() {
-  const songElement = document.getElementById("song");
 
-  // CHANGE THIS whenever you want
-  songElement.innerHTML = "💖 'Afterglow' – Taylor Swift";
+// 🎧 playlists
+const playlists = [
+  "https://open.spotify.com/embed/playlist/566OyyLICNBUXSXN0URb7O",
+  "https://open.spotify.com/embed/playlist/67MYiGXVGnPkTYY0t4CnJM",
+  "https://open.spotify.com/embed/playlist/5dCq1zDPBA2VCaKSqsrQte",
+  "https://open.spotify.com/embed/playlist/4TfbfHIKyGPZPAjxN3sliX",
+  "https://open.spotify.com/embed/playlist/0WAUFDbW9H8FJARmD1TWW5"
+];
+
+// 🔀 shuffle button
+function shufflePlaylist() {
+  const randomIndex = Math.floor(Math.random() * playlists.length);
+  document.getElementById("spotifyPlayer").src = playlists[randomIndex];
 }
 
-
+// ✅ ONE clean onload
 window.onload = () => {
   loadCount();
-  loadSong();
 };
-
 </script>
 
 </head>
@@ -129,9 +153,27 @@ window.onload = () => {
 </div>
   
 
+
 <div class="music-box">
-  <h3>What Runa is listening to:</h3>
-<iframe data-testid="embed-iframe" style="border-radius:12px" src="https://open.spotify.com/embed/playlist/566OyyLICNBUXSXN0URb7O?utm_source=generator" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+
+  <div class="music-header">
+    <h3>What Runa is listening to:</h3>
+    <button onclick="shufflePlaylist()">🔀</button>
+  </div>
+
+  <iframe 
+    id="spotifyPlayer"
+    style="border-radius:12px"
+    src="https://open.spotify.com/embed/playlist/566OyyLICNBUXSXN0URb7O"
+    width="100%"
+    height="352"
+    frameborder="0"
+    allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+    loading="lazy">
+  </iframe>
+
+</div>
+
 
 
 
