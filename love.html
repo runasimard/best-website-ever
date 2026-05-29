@@ -78,8 +78,11 @@ header {
 
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
+
+  gap: 10px; /* 👈 THIS is the key fix */
+  padding: 15px 0;
 }
 
 /* 👑 centered title layout */
@@ -112,6 +115,8 @@ header {
   font-size: 38px;
   cursor: pointer;
   transition: transform 0.15s ease;
+
+  margin-top: 4px; /* small nudge for perfect centering */
 }
 
 .battle-box button:hover {
