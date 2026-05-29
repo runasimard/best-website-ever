@@ -82,8 +82,20 @@ header {
   align-items: center;
 }
 
+/* 👑 centered title layout */
 .battle-box h2 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
   color: #E34A6F;
+}
+
+/* crown styling */
+.crown {
+  font-size: 22px;
+  line-height: 1;
 }
 
 .battle-box p {
@@ -167,15 +179,17 @@ async function loadBattle() {
   const runaTitle = document.getElementById("runaTitle");
   const mickTitle = document.getElementById("mickTitle");
 
-  // reset titles
-  runaTitle.innerText = "Runa Kisses";
-  mickTitle.innerText = "Mick Kisses";
+  const runaText = "Runa Kisses";
+  const mickText = "Mick Kisses";
 
-  // crown logic
+  runaTitle.innerHTML = runaText;
+  mickTitle.innerHTML = mickText;
+
   if (runaCount > mickCount) {
-    runaTitle.innerText = "👑 Runa Kisses";
-  } else if (mickCount > runaCount) {
-    mickTitle.innerText = "👑 Mick Kisses";
+    runaTitle.innerHTML = `<span class="crown">👑</span> ${runaText}`;
+  } 
+  else if (mickCount > runaCount) {
+    mickTitle.innerHTML = `<span class="crown">👑</span> ${mickText}`;
   }
 }
 
