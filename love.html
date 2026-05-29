@@ -10,7 +10,6 @@ body {
   text-align: center;
 }
 
-/* HEADER */
 header {
   background-color: #E34A6F;
   color: white;
@@ -32,12 +31,12 @@ header {
 }
 
 .count-number {
-  color: #000;
+  color: #000000;
   font-weight: 900;
   font-size: 22px;
+  text-shadow: 0 0 5px rgba(255, 0, 80, 0.6);
 }
 
-/* MAIN */
 .main {
   margin-top: 100px;
 }
@@ -45,9 +44,9 @@ header {
 .big-text {
   font-size: 30px;
   color: #E34A6F;
+  font-family: Figtree, sans-serif;
 }
 
-/* CONTENT LAYOUT */
 .content-row {
   display: flex;
   justify-content: center;
@@ -57,51 +56,54 @@ header {
   flex-wrap: wrap;
 }
 
-/* IMPORTANT FIX */
-.music-box,
+.music-box {
+  padding: 20px;
+  background: #fff0f5;
+  border: 2px solid #E34A6F;
+  border-radius: 10px;
+  width: 500px;
+}
+
 .battle-container {
   display: flex;
-}
-
-/* music stays normal */
-.music-box {
   flex-direction: column;
-  justify-content: flex-start;
+  gap: 20px;
 }
 
-/* battle side becomes full-height column */
-.battle-container {
-  flex-direction: column;
-  justify-content: space-between;
-  width: 220px;
-}
-
-/* IMPORTANT: make battle boxes fill evenly */
 .battle-box {
+  background: #fff0f5;
+  border: 2px solid #E34A6F;
+  border-radius: 12px;
+  width: 220px;
   flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
-/* TEXT */
 .battle-box h2 {
-  margin: 0;
   color: #E34A6F;
 }
 
 .battle-box p {
-  margin: 0;
   font-size: 40px;
   font-weight: bold;
-  color: #E34A6F;
+  margin: 10px 0;
 }
 
-/* BUTTON */
 .battle-box button {
   background: none;
   border: none;
   font-size: 38px;
+  line-height: 1;
   cursor: pointer;
   transition: transform 0.15s ease;
-  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 5px;
+  padding: 0;
 }
 
 .battle-box button:hover {
@@ -110,6 +112,18 @@ header {
 
 .battle-box button:active {
   transform: scale(0.92);
+}
+
+@keyframes pulseGlow {
+  0% {
+    text-shadow: 0 0 5px #ff4d88;
+  }
+  50% {
+    text-shadow: 0 0 10px #ff4d88, 0 0 20px #ff99bb;
+  }
+  100% {
+    text-shadow: 0 0 5px #ff4d88;
+  }
 }
 </style>
 
@@ -125,7 +139,7 @@ import {
 } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyDQY...",
+  apiKey: "AIzaSyDQYVloL2KEZBpYDS2AqIW35zuZqS4bBw",
   authDomain: "best-website-f6384.firebaseapp.com",
   projectId: "best-website-f6384",
   storageBucket: "best-website-f6384.firebasestorage.app",
@@ -136,19 +150,48 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
+async function loadCount() {
+  const ref = doc(db, "shame", "counter");
+  const snap = await getDoc(ref);
+
+  let count = 0;
+  if (snap.exists()) {
+    count = snap.data().value;
+  }
+
+  if (count > 0) {
+    document.getElementById("counterBox").style.display = "block";
+  }
+
+  document.getElementById("counter").innerHTML =
+    '🚨 MICK HATED RUNA <span class="count-number">' + count + '</span> TIMES 🚨';
+}
+
 async function loadBattle() {
-  const runaSnap = await getDoc(doc(db, "battle", "runa"));
-  const mickSnap = await getDoc(doc(db, "battle", "mick"));
+  const runaRef = doc(db, "battle", "runa");
+  const mickRef = doc(db, "battle", "mick");
 
-  let runa = runaSnap.exists() ? runaSnap.data().value : 0;
-  let mick = mickSnap.exists() ? mickSnap.data().value : 0;
+  const runaSnap = await getDoc(runaRef);
+  const mickSnap = await getDoc(mickRef);
 
-  document.getElementById("runaCount").innerText = runa;
-  document.getElementById("mickCount").innerText = mick;
+  let runaCount = 0;
+  let mickCount = 0;
+
+  if (runaSnap.exists()) {
+    runaCount = runaSnap.data().value;
+  }
+
+  if (mickSnap.exists()) {
+    mickCount = mickSnap.data().value;
+  }
+
+  document.getElementById("runaCount").innerText = runaCount;
+  document.getElementById("mickCount").innerText = mickCount;
 }
 
 window.addPoint = async function(person) {
   const ref = doc(db, "battle", person);
+
   const snap = await getDoc(ref);
 
   if (!snap.exists()) {
@@ -161,6 +204,7 @@ window.addPoint = async function(person) {
 };
 
 window.onload = () => {
+  loadCount();
   loadBattle();
 };
 </script>
@@ -174,20 +218,32 @@ window.onload = () => {
     <h1>RUNA'S FANPAGE</h1>
     <p>Only accessible to her OG 1 fan</p>
   </div>
+
+  <div id="counterBox" class="header-counter" style="display:none;">
+    <h3 id="counter">Loading shame...</h3>
+  </div>
 </header>
 
 <div class="main">
-  <p class="big-text">CONFIRMED. IT'S OFFICIAL. YOU'RE OBSESSED WITH ME</p>
+  <p class="big-text">CONFIRMED. IT'S OFFICIAL YOU'RE OBSESSED WITH ME</p>
+  <p>you may celebrate accordingly</p>
 </div>
 
 <div class="content-row">
 
   <div class="music-box">
     <h3>What Runa is listening to:</h3>
+
     <iframe
+      data-testid="embed-iframe"
       style="border-radius:12px"
-      src="https://open.spotify.com/embed/playlist/566OyyLICNBUXSXN0URb7O"
-      width="100%" height="352">
+      src="https://open.spotify.com/embed/playlist/566OyyLICNBUXSXN0URb7O?utm_source=generator"
+      width="100%"
+      height="352"
+      frameBorder="0"
+      allowfullscreen
+      allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+      loading="lazy">
     </iframe>
   </div>
 
