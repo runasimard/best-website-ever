@@ -63,19 +63,24 @@ header {
   align-items: center;
 }
 
-.music-header button {
-  background: #E34A6F;
-  color: white;
+.shuffle-btn {
+  background: none;
   border: none;
-  padding: 6px 10px;
-  border-radius: 8px;
+  font-size: 28px;   /* bigger emoji */
   cursor: pointer;
-  font-size: 16px;
+  padding: 5px;
+  transition: transform 0.15s ease;
 }
 
-.music-header button:hover {
-  background: #c73c5e;
+.shuffle-btn:hover {
+  transform: scale(1.2);  /* subtle grow on hover */
 }
+
+  
+#spotifyPlayer {
+  transition: opacity 0.25s ease;
+}
+
 </style>
 
 <script type="module">
@@ -122,10 +127,28 @@ const playlists = [
 ];
 
 
+
+let lastIndex = -1;
+
 window.shufflePlaylist = function () {
-  const randomIndex = Math.floor(Math.random() * playlists.length);
-  document.getElementById("spotifyPlayer").src = playlists[randomIndex];
+  let randomIndex;
+
+  do {
+    randomIndex = Math.floor(Math.random() * playlists.length);
+  } while (randomIndex === lastIndex);
+
+  lastIndex = randomIndex;
+
+  const player = document.getElementById("spotifyPlayer");
+
+  player.style.opacity = 0;
+
+  setTimeout(() => {
+    player.src = playlists[randomIndex];
+    player.style.opacity = 1;
+  }, 200);
 };
+
 
 // ✅ ONE clean onload
 
@@ -162,7 +185,7 @@ window.onload = () => {
 
   <div class="music-header">
     <h3>What Runa is listening to:</h3>
-    <button onclick="shufflePlaylist()">🔀</button>
+    <button class="shuffle-btn" onclick="shufflePlaylist()">🔀</button>
   </div>
 
   <iframe 
