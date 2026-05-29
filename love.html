@@ -37,6 +37,7 @@ header {
   text-shadow: 0 0 5px rgba(255, 0, 80, 0.6);
 }
 
+
 .main {
   margin-top: 100px;
 }
@@ -44,8 +45,9 @@ header {
 .big-text {
   font-size: 30px;
   color: #E34A6F;
+  font: Figtree, sans-serif;
 }
-
+  
 .music-box {
   margin-top: 40px;
   padding: 20px;
@@ -53,8 +55,9 @@ header {
   background: #fff0f5;
   border: 2px solid #E34A6F;
   border-radius: 10px;
-  width: 500px;
+  width:500px;
 }
+
 </style>
 
 <script type="module">
@@ -89,42 +92,20 @@ async function loadCount() {
   document.getElementById("counter").innerHTML =
     '🚨 MICK HATED RUNA <span class="count-number">' + count + '</span> TIMES 🚨';
 }
-
+  
 function loadSong() {
   const songElement = document.getElementById("song");
+
+  // CHANGE THIS whenever you want
   songElement.innerHTML = "💖 'Afterglow' – Taylor Swift";
 }
-
-// ✅ RANDOM PLAYLIST FUNCTION
-
-function loadRandomPlaylist() {
-  const playlists = [
-    "https://open.spotify.com/embed/playlist/0WAUFDbW9H8FJARmD1TWW5",
-    "https://open.spotify.com/embed/playlist/4TfbfHIKyGPZPAjxN3sliX",
-    "https://open.spotify.com/embed/playlist/2hfj8uhISKcVkp2U9Suxkd",
-    "https://open.spotify.com/embed/playlist/5dCq1zDPBA2VCaKSqsrQte",
-    "https://open.spotify.com/embed/playlist/4HVWNB0WITrw57qSiizTcP"
-  ];
-
-  const randomIndex = Math.floor(Math.random() * playlists.length);
-  const chosen = playlists[randomIndex];
-
-  document.getElementById("spotifyEmbed").innerHTML = `
-    <iframe style="border-radius:12px"
-      src="${chosen}"
-      width="100%"
-      height="152"
-      frameBorder="0"
-      allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture">
-    </iframe>
-  `;
 
 
 window.onload = () => {
   loadCount();
   loadSong();
-  loadRandomPlaylist(); // ✅ runs on every load
 };
+
 </script>
 
 </head>
@@ -143,15 +124,17 @@ window.onload = () => {
 </header>
 
 <div class="main">
-  <p class="big-text">CONFIRMED. IT'S OFFICIAL YOU'RE OBSESSED WITH ME</p>
+  <p class="big-text">CONFIRMED. IT'S OFFICIAL YOU'RE OBSSESSED WITH ME </p>
   <p>you may celebrate accordingly</p>
 </div>
+  
 
 <div class="music-box">
   <h3>What Runa is listening to:</h3>
-  <!-- ✅ RANDOM PLAYLIST INSERTS HERE -->
-  <div id="spotifyEmbed"></div>
-</div>
+<iframe data-testid="embed-iframe" style="border-radius:12px" src="https://open.spotify.com/embed/playlist/566OyyLICNBUXSXN0URb7O?utm_source=generator" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+
+
+
 
 </body>
 </html>
