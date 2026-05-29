@@ -69,6 +69,8 @@ header {
   display: flex;
   flex-direction: column;
   gap: 20px;
+  height: 396px;
+  justify-content: space-between;
 }
 .battle-box {
   background: #fff0f5;
@@ -89,17 +91,21 @@ header {
 }
 
 .battle-box button {
-  background: #E34A6F;
-  color: white;
+  background: none;
   border: none;
-  padding: 10px 16px;
-  border-radius: 8px;
+  font-size: 60px;
   cursor: pointer;
-  font-size: 16px;
+  transition: transform 0.15s ease;
+  padding: 0;
 }
 
 .battle-box button:hover {
-  background: #c63c5e;
+  transform: scale(1.15);
+  background: none;
+}
+
+.battle-box button:active {
+  transform: scale(0.9);
 }
 
   @keyframes pulseGlow {
@@ -191,11 +197,15 @@ async function loadCount() {
 window.addPoint = async function(person) {
   const ref = doc(db, "battle", person);
 
-  await setDoc(ref, { value: 0 }, { merge: true });
+  const snap = await getDoc(ref);
 
-  await updateDoc(ref, {
-    value: increment(1)
-  });
+  if (!snap.exists()) {
+    await setDoc(ref, { value: 1 });
+  } else {
+    await updateDoc(ref, {
+      value: increment(1)
+    });
+  }
 
   loadBattle();
 };
