@@ -57,12 +57,56 @@ header {
   border-radius: 10px;
   width:500px;
 }
+.battle-container {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  margin-top: 40px;
+}
 
+.battle-box {
+  background: #fff0f5;
+  border: 2px solid #E34A6F;
+  border-radius: 12px;
+  padding: 20px;
+  width: 220px;
+}
+
+.battle-box h2 {
+  color: #E34A6F;
+}
+
+.battle-box p {
+  font-size: 40px;
+  font-weight: bold;
+  margin: 10px 0;
+}
+
+.battle-box button {
+  background: #E34A6F;
+  color: white;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.battle-box button:hover {
+  background: #c63c5e;
+}
 </style>
 
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
-import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+import {
+  getFirestore,
+  doc,
+  getDoc,
+  setDoc,
+  updateDoc,
+  increment
+} from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
 const firebaseConfig = {
   apiKey: "AIzaSyDQqYVloL2KEZBpYDS2AqIW35zuZqS4bBw",
@@ -92,7 +136,40 @@ async function loadCount() {
   document.getElementById("counter").innerHTML =
     '🚨 MICK HATED RUNA <span class="count-number">' + count + '</span> TIMES 🚨';
 }
-  
+  async function loadBattle() {
+  const runaRef = doc(db, "battle", "runa");
+  const mickRef = doc(db, "battle", "mick");
+
+  const runaSnap = await getDoc(runaRef);
+  const mickSnap = await getDoc(mickRef);
+
+  let runaCount = 0;
+  let mickCount = 0;
+
+  if (runaSnap.exists()) {
+    runaCount = runaSnap.data().value;
+  }
+
+  if (mickSnap.exists()) {
+    mickCount = mickSnap.data().value;
+  }
+
+  document.getElementById("runaCount").innerText = runaCount;
+  document.getElementById("mickCount").innerText = mickCount;
+}
+
+window.addPoint = async function(person) {
+  const ref = doc(db, "battle", person);
+
+  await setDoc(ref, { value: 0 }, { merge: true });
+
+  await updateDoc(ref, {
+    value: increment(1)
+  });
+
+  loadBattle();
+};
+
 function loadSong() {
   const songElement = document.getElementById("song");
 
@@ -104,6 +181,7 @@ function loadSong() {
 window.onload = () => {
   loadCount();
   loadSong();
+  loadBattle();
 };
 
 </script>
@@ -131,10 +209,23 @@ window.onload = () => {
 
 <div class="music-box">
   <h3>What Runa is listening to:</h3>
+   <p id="song"></p>
 <iframe data-testid="embed-iframe" style="border-radius:12px" src="https://open.spotify.com/embed/playlist/566OyyLICNBUXSXN0URb7O?utm_source=generator" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+<div class="battle-container">
 
+  <div class="battle-box">
+    <h2>💋 Runa Kisses</h2>
+    <p id="runaCount">0</p>
+    <button onclick="addPoint('runa')">Kiss Runa</button>
+  </div>
 
+  <div class="battle-box">
+    <h2>💋 Mick Kisses</h2>
+    <p id="mickCount">0</p>
+    <button onclick="addPoint('mick')">Kiss Mick</button>
+  </div>
+</div>
 
-
+</div>
 </body>
 </html>
