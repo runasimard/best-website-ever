@@ -37,7 +37,6 @@ header {
   text-shadow: 0 0 5px rgba(255, 0, 80, 0.6);
 }
 
-
 .main {
   margin-top: 100px;
 }
@@ -45,9 +44,8 @@ header {
 .big-text {
   font-size: 30px;
   color: #E34A6F;
-  font: Figtree, sans-serif;
 }
-  
+
 .music-box {
   margin-top: 40px;
   padding: 20px;
@@ -55,9 +53,8 @@ header {
   background: #fff0f5;
   border: 2px solid #E34A6F;
   border-radius: 10px;
-  width:500px;
+  width: 500px;
 }
-
 </style>
 
 <script type="module">
@@ -92,7 +89,14 @@ async function loadCount() {
   document.getElementById("counter").innerHTML =
     '🚨 MICK HATED RUNA <span class="count-number">' + count + '</span> TIMES 🚨';
 }
-  function loadRandomPlaylist() {
+
+function loadSong() {
+  const songElement = document.getElementById("song");
+  songElement.innerHTML = "💖 'Afterglow' – Taylor Swift";
+}
+
+// ✅ RANDOM PLAYLIST FUNCTION
+function loadRandomPlaylist() {
   const playlists = [
     "https://open.spotify.com/embed/playlist/0WAUFDbW9H8FJARmD1TWW5?utm_source=generator",
     "https://open.spotify.com/embed/playlist/4TfbfHIKyGPZPAjxN3sliX?utm_source=generator",
@@ -106,29 +110,16 @@ async function loadCount() {
   const chosen = playlists[randomIndex];
 
   document.getElementById("spotifyEmbed").innerHTML = `
-    <iframe 
-      data-testid="embed-iframe"
-      style="border-radius:12px"
-      src="${chosen}"
-      width="100%"
-      height="352"
-      frameborder="0"
-      allowfullscreen=""
-      allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in
-function loadSong() {
-  const songElement = document.getElementById("song");
-
-  // CHANGE THIS whenever you want
-  songElement.innerHTML = "💖 'Afterglow' – Taylor Swift";
+    ${chosen}
+    </iframe>
+  `;
 }
-
 
 window.onload = () => {
   loadCount();
   loadSong();
-  loadRandomPlaylist();
+  loadRandomPlaylist(); // ✅ runs on every load
 };
-
 </script>
 
 </head>
@@ -147,14 +138,15 @@ window.onload = () => {
 </header>
 
 <div class="main">
-  <p class="big-text">CONFIRMED. IT'S OFFICIAL YOU'RE OBSSESSED WITH ME </p>
+  <p class="big-text">CONFIRMED. IT'S OFFICIAL YOU'RE OBSSESSED WITH ME</p>
   <p>you may celebrate accordingly</p>
 </div>
-  
 
 <div class="music-box">
   <h3>What Runa is listening to:</h3>
-<div id="spotifyEmbed"></div>
+  <!-- ✅ RANDOM PLAYLIST INSERTS HERE -->
+  <div id="spotifyEmbed"></div>
+</div>
 
 </body>
 </html>
