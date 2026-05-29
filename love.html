@@ -200,17 +200,12 @@ window.addPoint = async function(person) {
   loadBattle();
 };
 
-function loadSong() {
-  const songElement = document.getElementById("song");
 
-  // CHANGE THIS whenever you want
-  songElement.innerHTML = "💖 'Afterglow' – Taylor Swift";
-}
 
 
 window.onload = () => {
   loadCount();
-  loadSong();
+
   loadBattle();
 };
 
@@ -242,7 +237,6 @@ window.onload = () => {
   <div class="music-box">
     <h3>What Runa is listening to:</h3>
 
-    <p id="song"></p>
 
     <iframe
       data-testid="embed-iframe"
