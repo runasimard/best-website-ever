@@ -112,13 +112,15 @@ async function loadCount() {
 }
 
 // 🎧 playlists
+
 const playlists = [
-  "https://open.spotify.com/embed/playlist/566OyyLICNBUXSXN0URb7O",
-  "https://open.spotify.com/embed/playlist/67MYiGXVGnPkTYY0t4CnJM",
-  "https://open.spotify.com/embed/playlist/5dCq1zDPBA2VCaKSqsrQte",
-  "https://open.spotify.com/embed/playlist/4TfbfHIKyGPZPAjxN3sliX",
-  "https://open.spotify.com/embed/playlist/0WAUFDbW9H8FJARmD1TWW5"
+  "https://open.spotify.com/embed/playlist/566OyyLICNBUXSXN0URb7O?utm_source=generator",
+  "https://open.spotify.com/embed/playlist/67MYiGXVGnPkTYY0t4CnJM?utm_source=generator",
+  "https://open.spotify.com/embed/playlist/5dCq1zDPBA2VCaKSqsrQte?utm_source=generator",
+  "https://open.spotify.com/embed/playlist/4TfbfHIKyGPZPAjxN3sliX?utm_source=generator",
+  "https://open.spotify.com/embed/playlist/0WAUFDbW9H8FJARmD1TWW5?utm_source=generator"
 ];
+
 
 // 🔀 shuffle button
 function shufflePlaylist() {
@@ -127,9 +129,12 @@ function shufflePlaylist() {
 }
 
 // ✅ ONE clean onload
+
 window.onload = () => {
   loadCount();
+  shufflePlaylist();  // ✅ randomly pick playlist every refresh
 };
+
 </script>
 
 </head>
