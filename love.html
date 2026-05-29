@@ -64,19 +64,20 @@ header {
   border-radius: 10px;
   width: 500px;
 }
-
 .battle-container {
   display: flex;
   flex-direction: column;
   gap: 20px;
+  height: 396px;
 }
+
 .battle-box {
   background: #fff0f5;
   border: 2px solid #E34A6F;
   border-radius: 12px;
-  padding: 15px;
+  flex: 1;
+
   width: 220px;
-  height: 160px;
 
   display: flex;
   flex-direction: column;
@@ -97,19 +98,26 @@ header {
 .battle-box button {
   background: none;
   border: none;
-  font-size: 50px;
+  font-size: 38px;
+  line-height: 1;
+
   cursor: pointer;
   transition: transform 0.15s ease;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  margin-top: 5px;
   padding: 0;
 }
 
 .battle-box button:hover {
-  transform: scale(1.15);
-  background: none;
+  transform: scale(1.1);
 }
 
 .battle-box button:active {
-  transform: scale(0.9);
+  transform: scale(0.92);
 }
 
   @keyframes pulseGlow {
