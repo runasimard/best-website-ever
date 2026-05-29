@@ -96,31 +96,29 @@ function loadSong() {
 }
 
 // ✅ RANDOM PLAYLIST FUNCTION
+
 function loadRandomPlaylist() {
   const playlists = [
-    "https://open.spotify.com/embed/playlist/0WAUFDbW9H8FJARmD1TWW5?utm_source=generator",
-    "https://open.spotify.com/embed/playlist/4TfbfHIKyGPZPAjxN3sliX?utm_source=generator",
-    "https://open.spotify.com/embed/playlist/2hfj8uhISKcVkp2U9Suxkd?utm_source=generator",
-    "https://open.spotify.com/embed/playlist/4TfbfHIKyGPZPAjxN3sliX?utm_source=generator",
-    "https://open.spotify.com/embed/playlist/5dCq1zDPBA2VCaKSqsrQte?utm_source=generator",
-    "https://open.spotify.com/embed/playlist/4HVWNB0WITrw57qSiizTcP?utm_source=generator"
+    "https://open.spotify.com/embed/playlist/0WAUFDbW9H8FJARmD1TWW5",
+    "https://open.spotify.com/embed/playlist/4TfbfHIKyGPZPAjxN3sliX",
+    "https://open.spotify.com/embed/playlist/2hfj8uhISKcVkp2U9Suxkd",
+    "https://open.spotify.com/embed/playlist/5dCq1zDPBA2VCaKSqsrQte",
+    "https://open.spotify.com/embed/playlist/4HVWNB0WITrw57qSiizTcP"
   ];
 
   const randomIndex = Math.floor(Math.random() * playlists.length);
   const chosen = playlists[randomIndex];
 
- 
-document.getElementById("spotifyEmbed").innerHTML = `
-  <iframe style="border-radius:12px"
-    src="${chosen}"
-    width="100%"
-    height="152"
-    frameBorder="0"
-    allowfullscreen=""
-    allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture">
-  </iframe>
+  document.getElementById("spotifyEmbed").innerHTML = `
+    <iframe style="border-radius:12px"
+      src="${chosen}"
+      width="100%"
+      height="152"
+      frameBorder="0"
+      allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture">
+    </iframe>
+  `;
 
-}
 
 window.onload = () => {
   loadCount();
